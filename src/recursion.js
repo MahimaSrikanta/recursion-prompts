@@ -7,31 +7,121 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+	if (n ===0){
+		return 1;
+	}
+	else if(n<0){
+		return null;
+	}
+	else{
+		return n*factorial(n-1);
+	}
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+	if(array.length ===0){
+		return 0;
+	}
+	else{
+		return array[0]+sum(array.slice(1));
+	}
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+	//create a result variable to hold the sum
+	var result=0;
+	//check if the given value is typeof number. if yes, return the value
+	if(  typeof(array)==='number' ){
+		return array;
+	}
+	else if (array.length == []){
+		return 0;
+	}
+	//If no, then  looop through the given array and pass each element to the arraySum.and add the returned value
+	else{
+		for(var i =0;i<array.length;i++){
+			result+= arraySum(array[i]);
+		}
+		 
+	}
+	//return the result
+	return result;
+	
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+	//check if the number is 0 than return true
+	if(n === 0){
+		return true
+	}
+
+	//else if the number is 1 than return false
+	else if(n ===1){
+		return false;
+	}
+
+	//else call isEven by passing n -2; and return .
+	else if (n >0){
+		return isEven(n-2)
+	}
+	else {
+		return isEven(n+2)
+	}
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
-};
+	var result=0;
+	var tmp=0;
 
+		if(n ===0){
+			return 0;
+		}
+		else if(n>0){
+			result= n+ sumBelow(n-1);
+			return result-1
+		}
+		else{
+			result= n+ sumBelow(n+1);
+			return result+1;
+		}
+
+	//sumBelow (n-1);
+	return result;
+};
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+	//create a result array
+	var result=[];
+	if(y===(x+1)){
+		return result;
+	}
+	else if(x===y){
+		return result;
+	}
+	//for range with end less than start
+	else if(y<x){
+		var temp =x;
+		x=y;
+		y=temp;
+		y--;
+	return  result.concat(range(x,y),y).reverse();
+	}
+	//else concat with the given array, the returned value
+	else{
+	  y--;
+	return  result.concat(range(x,y),y)
+	}
+	//return result;
+
 };
 
 // 7. Compute the exponent of a number.
